@@ -1,18 +1,47 @@
 {
-  "name": "embed",
-  "version": "0.0.0",
-  "description": "embed =====",
+  "name": "este",
+  "version": "6.3.8",
+  "description": "Este is robust, modular and comfortable dev stack for web apps development with several unique features",
+  "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
+  "keywords": [
+    "Closure",
+    "CoffeeScript",
+    "Compiler",
+    "Este",
+    "Google",
+    "Mocha",
+    "React",
+    "Stylus"
+  ],
   "private": true,
-  "scripts": {
-    "test": "gulp test"
-  },
-  "devDependencies": {
-    "gulp": "^3.8.7",
-    "gulp-este": "^1.0.5",
-    "run-sequence": "^0.3.6",
-    "yargs": "^1.3.1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steida/este.git"
   },
   "dependencies": {
-    "express": "^4.8.3"
-  }
+    "body-parser": "^1.0.1",
+    "coffee-script": "^1.7.1",
+    "compression": "^1.0.1",
+    "express": "^4.0.0",
+    "gulp": "^3.6.0",
+    "jsdom": "^0.11.0",
+    "method-override": "^2.0.0",
+    "react": "^0.11.0",
+    "static-favicon": "^1.0.2"
+  },
+  "devDependencies": {
+    "gulp-este": "^1.0.1",
+    "piping": "~0.1.6",
+    "run-sequence": "^0.3.6",
+    "yargs": "^1.2.1"
+  },
+  "scripts": {
+    "start": "node app/server",
+    "test": "gulp build --production"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "license": "MIT",
+  "subdomain": "este"
 }
