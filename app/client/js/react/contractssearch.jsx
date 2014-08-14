@@ -1,6 +1,9 @@
 goog.provide('app.react.ContractsSearch');
 
-goog.require('app.contracts.Contract')
+goog.require('app.contracts.Contract');
+goog.require('goog.i18n.DateTimeFormat');
+goog.require('goog.i18n.DateTimeParse');
+goog.require('goog.ui.InputDatePicker');
 
 /**
   @constructor
@@ -44,6 +47,16 @@ app.react.ContractsSearch = function() {
                 id="contract-ident-id"
               />
             </div>
+            <div className="form-group">
+              <label htmlFor="contract-date">Date</label>
+              <input
+                name="date"
+                ref="date"
+                type="text"
+                className="form-control"
+                id="contract-date"
+              />
+            </div>
             <button type="submit" className="btn btn-default">Submit</button>
           </form>
           <div className="errors">
@@ -56,11 +69,15 @@ app.react.ContractsSearch = function() {
     },
 
     componentDidMount: function() {
-      console.log('komponenta se vykreslila');
+      var PATTERN = "MM'/'dd'/'yyyy";
+      var formatter = new goog.i18n.DateTimeFormat(PATTERN);
+      var parser = new goog.i18n.DateTimeParse(PATTERN);
+      this.inputDatePicker = new goog.ui.InputDatePicker(formatter, parser);
+      this.inputDatePicker.decorate(this.refs['date'].getDOMNode());
     },
 
     componentWillUnmount: function() {
-      console.log('komponenta je pryc');
+      this.inputDatePicker.dispose()
     },
 
     onFormSubmit: function(e) {
