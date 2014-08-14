@@ -13,6 +13,13 @@ app.main = function(data) {
     "with": {
       element: document.body
     }
+  }, {
+    resolve: este.History,
+    by: function() {
+      return new este.History({
+        forceHash: true
+      });
+    }
   });
 
   container.resolveApp();

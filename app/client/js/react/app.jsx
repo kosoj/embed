@@ -1,16 +1,29 @@
 goog.provide('app.react.App');
 
 goog.require('app.react.Header');
+goog.require('app.react.pages.Contracts');
+goog.require('app.react.pages.Home');
 
 app.react.App = React.createClass({
 
   render: function() {
     return (
       <div className="app">
-        <app.react.Header />
+        <app.react.Header routes={this.props.routes} />
         <h1>Ahoj</h1>
+        {this.getActivePage()}
       </div>
     );
+  },
+
+  getActivePage: function() {
+    var routes = this.props.routes;
+    switch(routes.active) {
+      case routes.home:
+        return <app.react.pages.Home />
+      case routes.contracts:
+        return <app.react.pages.Contracts />
+    }
   }
 
 });
