@@ -3,7 +3,6 @@ goog.provide('app.Routes');
 goog.require('este.Routes');
 
 /**
-  @param {app.Storage} storage
   @constructor
   @extends {este.Routes}
  */

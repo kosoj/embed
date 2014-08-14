@@ -1,22 +1,20 @@
 goog.provide('App');
 
-goog.require('app.react.App');
-
 /**
   @param {este.Router} router
   @param {app.Routes} routes
   @param {Element} element
+  @param {app.react.App} reactApp
   @constructor
  */
-App = function(router, routes, element) {
-  this.element = element;
-  this.routes = routes;
-  routes.addToEste(router);
-  routes.listen('change', this.syncUI.bind(this));
-  router.start()
-};
+App = function(router, routes, element, reactApp) {
 
-App.prototype.syncUI = function() {
-  // document.title = appTitle.get()
-  React.renderComponent(<app.react.App routes={this.routes} />, this.element);
+  var syncUI = function() {
+    // document.title = appTitle.get()
+    React.renderComponent(<reactApp.component />, element);
+  };
+
+  routes.addToEste(router);
+  routes.listen('change', syncUI);
+  router.start()
 };

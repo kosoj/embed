@@ -1,13 +1,20 @@
 goog.provide('app.react.pages.Contracts');
 
-app.react.pages.Contracts = React.createClass({
+/**
+  @constructor
+*/
+app.react.pages.Contracts = function() {
 
-  render: function() {
-    return (
-      <div className="contracts">
-        <p>TODO: Search form. And listing.</p>
-      </div>
-    );
-  }
+  this.component = React.createClass({
 
-});
+   render: function() {
+     return (
+       <div className="home">
+         <p>TODO: Search and listing.</p>
+       </div>
+     );
+   }
+
+ });
+
+};
