@@ -29,7 +29,10 @@ var paths = {
     'app/**/*_test.js'
   ],
   compiler: 'bower_components/closure-compiler/compiler.jar',
-  externs: ['bower_components/react-externs/externs.js'],
+  externs: [
+    'app/client/js/externs.js',
+    'bower_components/react-externs/externs.js'
+  ],
   thirdParty: {
     development: [
       'bower_components/react/react.js'
