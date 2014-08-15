@@ -11,6 +11,7 @@ app.Routes = function() {
 
   this.home = this.route('/');
   this.contracts = this.route('/contracts');
+  this.contractDetail = this.route('/contract/:id');
 
   // this.notFound = this.route('*');
 }

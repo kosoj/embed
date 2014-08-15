@@ -5,11 +5,13 @@ goog.provide('app.react.App');
   @param {app.react.Header} header
   @param {app.react.pages.Home} homePage
   @param {app.react.pages.Contracts} contractsPage
+  @param {app.react.pages.ContractDetail} contractDetailPage
   @constructor
 */
 app.react.App = function(routes, header,
     homePage,
-    contractsPage) {
+    contractsPage,
+    contractDetailPage) {
 
   this.component = React.createClass({
 
@@ -29,6 +31,8 @@ app.react.App = function(routes, header,
           return <homePage.component />
         case routes.contracts:
           return <contractsPage.component />
+        case routes.contractDetail:
+          return <contractDetailPage.component />
       }
     }
 
