@@ -60,7 +60,8 @@ app.react.ContractsSearch = function(contractsStore) {
             </div>
             <button
               disabled={this.state.searching}
-              type="submit" className="btn btn-default">Submit</button>
+              type="submit" className="btn btn-default"
+            >{this.state.searching ? 'searching...' : 'Submit'}</button>
           </form>
           <div className="errors">
             {this.state.errors.map(function(error) {
@@ -92,21 +93,16 @@ app.react.ContractsSearch = function(contractsStore) {
       if (!this.validate()) return;
       this.setSubmitButtonEnabled(false);
       contractsStore.search(contract)
-        .then(this.onContractsFound)
-        .thenCatch(this.onContractsError)
+        // .thenCatch(this.onContractsError)
         .thenAlways(function() {
           this.setSubmitButtonEnabled(true);
         }, this);
     },
 
-    onContractsFound: function(contracts) {
-      this.props.onContractsFound(contracts);
-      // console.log(contracts);
-    },
-
-    onContractsError: function(reason) {
-      // console.log(reason);
-    },
+    // Note: Even this error can be handled by ContractStore.
+    // onContractsError: function(reason) {
+    //   console.log(reason);
+    // },
 
     onFieldChange: function(e) {
       var name = e.target.name;

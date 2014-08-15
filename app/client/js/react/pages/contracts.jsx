@@ -9,27 +9,14 @@ app.react.pages.Contracts = function(contractsSearch, contractsListing) {
 
   this.component = React.createClass({
 
-    getInitialState: function() {
-      return {
-        contracts: []
-      }
-    },
-
     render: function() {
       return (
         <div className="home">
-          <contractsSearch.component
-            onContractsFound={this.onContractsFound}  />
-          <contractsListing.component
-            contracts={this.state.contracts} />
+          <contractsSearch.component />
+          <contractsListing.component />
         </div>
       );
-    },
-
-    onContractsFound: function(contracts) {
-      this.setState({contracts: contracts})
     }
-
  });
 
 };

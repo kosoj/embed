@@ -2,9 +2,10 @@ goog.provide('app.react.ContractsListing');
 
 /**
   @param {app.Routes} routes
+  @param {app.contracts.Store} contractsStore
   @constructor
 */
-app.react.ContractsListing = function(routes) {
+app.react.ContractsListing = function(routes, contractsStore) {
 
   this.component = React.createClass({
 
@@ -25,7 +26,7 @@ app.react.ContractsListing = function(routes) {
             </tr>
           </thead>
           <tbody>
-            {this.props.contracts.map(this.createRow)}
+            {contractsStore.foundContracts.map(this.createRow)}
           </tbody>
         </table>
       );
@@ -70,8 +71,8 @@ app.react.ContractsListing = function(routes) {
     },
 
     onDeleteClick: function(contract, e) {
-      // contractsStore.remove(contract)
-      console.log(contract);
+      if (confirm('Fakt to chcete smazat?'))
+        contractsStore.remove(contract);
     },
 
     onEditToggleClick: function(contract, e) {
