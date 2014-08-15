@@ -22,6 +22,11 @@ app.contracts.Contract = function() {
   */
   this.date = ''
 
+  /**
+    @type {string}
+  */
+  this.text = ''
+
 };
 
 /**
