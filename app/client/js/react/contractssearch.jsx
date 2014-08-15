@@ -17,7 +17,8 @@ app.react.ContractsSearch = function(contractsStore) {
 
     getInitialState: function() {
       return {
-        errors: []
+        errors: [],
+        searching: false
       }
     },
 
@@ -57,7 +58,9 @@ app.react.ContractsSearch = function(contractsStore) {
                 id="contract-date"
               />
             </div>
-            <button type="submit" className="btn btn-default">Submit</button>
+            <button
+              disabled={this.state.searching}
+              type="submit" className="btn btn-default">Submit</button>
           </form>
           <div className="errors">
             {this.state.errors.map(function(error) {
@@ -87,13 +90,22 @@ app.react.ContractsSearch = function(contractsStore) {
     onFormSubmit: function(e) {
       e.preventDefault();
       if (!this.validate()) return;
+      this.setSubmitButtonEnabled(false);
       contractsStore.search(contract)
-        .then(function(contracts) {
-          console.log(contracts);
-        })
-        .thenCatch(function(reason) {
-          console.log(reason);
-        })
+        .then(this.onContractsFound)
+        .thenCatch(this.onContractsError)
+        .thenAlways(function() {
+          this.setSubmitButtonEnabled(true);
+        }, this);
+    },
+
+    onContractsFound: function(contracts) {
+      this.props.onContractsFound(contracts);
+      // console.log(contracts);
+    },
+
+    onContractsError: function(reason) {
+      // console.log(reason);
     },
 
     onFieldChange: function(e) {
@@ -110,6 +122,13 @@ app.react.ContractsSearch = function(contractsStore) {
       var errors = contract.validate();
       this.setState({errors: errors});
       return !errors.length;
+    },
+
+    /**
+      @param {boolean} enabled
+    */
+    setSubmitButtonEnabled: function(enabled) {
+      this.setState({searching: !enabled});
     }
 
  });
