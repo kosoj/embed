@@ -6,9 +6,10 @@ goog.require('goog.i18n.DateTimeParse');
 goog.require('goog.ui.InputDatePicker');
 
 /**
+  @param {app.contracts.Store} contractsStore
   @constructor
 */
-app.react.ContractsSearch = function() {
+app.react.ContractsSearch = function(contractsStore) {
 
   var contract = new app.contracts.Contract;
 
@@ -16,7 +17,6 @@ app.react.ContractsSearch = function() {
 
     getInitialState: function() {
       return {
-        formSubmitted: false,
         errors: []
       }
     },
@@ -61,7 +61,11 @@ app.react.ContractsSearch = function() {
           </form>
           <div className="errors">
             {this.state.errors.map(function(error) {
-              return <p>{error.message}</p>;
+              return (
+                <p key={error.message}>
+                  {error.prop + ': ' + error.message}
+                </p>
+              );
             })}
           </div>
         </div>
@@ -82,22 +86,30 @@ app.react.ContractsSearch = function() {
 
     onFormSubmit: function(e) {
       e.preventDefault();
-      this.setState({formSubmitted: true})
-      this.validate();
+      if (!this.validate()) return;
+      contractsStore.search(contract)
+        .then(function(contracts) {
+          console.log(contracts);
+        })
+        .thenCatch(function(reason) {
+          console.log(reason);
+        })
     },
 
     onFieldChange: function(e) {
-      var state = {}
       var name = e.target.name;
       var value = e.target.value;
       contract[name] = value;
-      this.validate();
       this.forceUpdate();
     },
 
+    /**
+      @return {boolean}
+    */
     validate: function() {
       var errors = contract.validate();
       this.setState({errors: errors});
+      return !errors.length;
     }
 
  });
