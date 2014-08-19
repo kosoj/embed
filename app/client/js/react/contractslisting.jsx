@@ -41,7 +41,7 @@ app.react.ContractsListing = function(routes, contractsStore) {
             isEdited
               ? <input defaultValue={contract.number} />
               : <a href={
-                  routes.contractDetail.createUrl({id: contract.number})
+                  routes.contractDetail.url({id: contract.number})
                 }>show {contract.number}</a>
           }</td>
           <td>{

@@ -15,8 +15,10 @@ App = function(router, routes, element, reactApp, contractsStore) {
     React.renderComponent(<reactApp.component />, element);
   };
 
-  routes.addToEste(router);
-  routes.listen('change', syncUI);
+  routes.addToEste(router, function(route, params) {
+    routes.setActive(route, params);
+    syncUI();
+  });
 
   // TODO(steida): We are slowly overloading app, there should be a object
   // which responsibility is to watch all stores and notify changes.
