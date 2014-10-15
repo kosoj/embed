@@ -1,7 +1,7 @@
 {
-  "name": "este",
-  "version": "6.3.8",
-  "description": "Este is robust, modular and comfortable dev stack for web apps development with several unique features",
+  "name": "embedit-este",
+  "version": "1.0.0",
+  "description": "Application based on Este library, see https://github.com/steida/este",
   "author": "Daniel Steigerwald <daniel@steigerwald.cz>",
   "keywords": [
     "Closure",
@@ -16,7 +16,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/steida/este.git"
+    "url": "https://github.com/kosoj/embed.git"
   },
   "dependencies": {
     "body-parser": "^1.0.1",
@@ -43,5 +43,5 @@
     "node": "0.10.x"
   },
   "license": "MIT",
-  "subdomain": "este"
+  "subdomain": "embedit"
 }

@@ -1,5 +1,10 @@
-Build with [Este](https://github.com/steida/este).
+# EmbedIT ESTE
 
-For news, follow [twitter.com/estejs](https://twitter.com/estejs).
+Enhanced [Embed](https://github.com/steida/embed) tutorial example
+Based on [Este](https://github.com/steida/este)
 
-Build for training.
+
+# Build and Run
+    npm i
+    bower i
+    gulp run

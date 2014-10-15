@@ -3,9 +3,9 @@ goog.provide('app.main');
 goog.require('app.DiContainer');
 
 /**
-  @param {Object} data Server side data. Useful for config, preload, whatever.
+ @param {Object} data Server side data. Useful for config, preload, whatever.
  */
-app.main = function(data) {
+app.main = function (data) {
   var container = new app.DiContainer;
 
   container.configure({
@@ -15,7 +15,7 @@ app.main = function(data) {
     }
   }, {
     resolve: este.History,
-    by: function() {
+    by: function () {
       return new este.History({
         forceHash: true
       });

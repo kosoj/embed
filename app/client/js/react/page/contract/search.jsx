@@ -1,17 +1,17 @@
-goog.provide('app.react.ContractsSearch');
+goog.provide('app.react.page.contract.ContractSearch');
 
-goog.require('app.contracts.Contract');
+goog.require('app.model.entity.ContractFilter');
 goog.require('goog.i18n.DateTimeFormat');
 goog.require('goog.i18n.DateTimeParse');
 goog.require('goog.ui.InputDatePicker');
 
 /**
-  @param {app.contracts.Store} contractsStore
+  @param {app.model.store.ContractStore} store
   @constructor
 */
-app.react.ContractsSearch = function(contractsStore) {
+app.react.page.contract.ContractSearch = function(store) {
 
-  var contract = new app.contracts.Contract;
+  var filter = new app.model.entity.ContractFilter;
 
   this.component = React.createClass({
 
@@ -23,6 +23,8 @@ app.react.ContractsSearch = function(contractsStore) {
     },
 
     render: function() {
+      var isError = this.state.errors.length > 0;
+
       return (
         <div>
           <form onSubmit={this.onFormSubmit} role="form" className="contracts-search">
@@ -34,18 +36,18 @@ app.react.ContractsSearch = function(contractsStore) {
                 name="number"
                 onChange={this.onFieldChange}
                 type="text"
-                value={contract.number}
+                value={filter.number}
               />
             </div>
             <div className="form-group">
               <label htmlFor="contract-ident-id">Ident</label>
               <input
-                value={contract.ident}
                 onChange={this.onFieldChange}
                 name="ident"
                 type="text"
                 className="form-control"
                 id="contract-ident-id"
+                value={filter.ident}
               />
             </div>
             <div className="form-group">
@@ -55,7 +57,8 @@ app.react.ContractsSearch = function(contractsStore) {
                 ref="date"
                 type="text"
                 className="form-control"
-                id="contract-date"
+                id="contract-date-id"
+                value={filter.date}
               />
             </div>
             <button
@@ -63,15 +66,26 @@ app.react.ContractsSearch = function(contractsStore) {
               type="submit" className="btn btn-default"
             >{this.state.searching ? 'searching...' : 'Submit'}</button>
           </form>
-          <div className="errors">
-            {this.state.errors.map(function(error) {
-              return (
-                <p key={error.message}>
-                  {error.prop + ': ' + error.message}
-                </p>
-              );
-            })}
-          </div>
+          {isError ?
+            <div>
+              <br/>
+              <h4 className="bg-danger">Validation errors</h4>
+              <table className="table table-condensed table-striped errors">
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Messsage</th>
+                  </tr>
+                  {this.state.errors.map(function(error, index) {
+                    return (
+                      <tr>
+                        <td>{error.prop}</td>
+                        <td><small>{error.message}</small></td>
+                      </tr>
+                    );
+                  })}
+              </table>
+            </div>
+          : ""}
         </div>
       );
     },
@@ -90,9 +104,11 @@ app.react.ContractsSearch = function(contractsStore) {
 
     onFormSubmit: function(e) {
       e.preventDefault();
-      if (!this.validate()) return;
+      if (!this.validate()) {
+        return;
+      }
       this.setSubmitButtonEnabled(false);
-      contractsStore.search(contract)
+      store.search(filter)
         // .thenCatch(this.onContractsError)
         .thenAlways(function() {
           this.setSubmitButtonEnabled(true);
@@ -107,7 +123,7 @@ app.react.ContractsSearch = function(contractsStore) {
     onFieldChange: function(e) {
       var name = e.target.name;
       var value = e.target.value;
-      contract[name] = value;
+      filter[name] = value;
       this.forceUpdate();
     },
 
@@ -115,7 +131,7 @@ app.react.ContractsSearch = function(contractsStore) {
       @return {boolean}
     */
     validate: function() {
-      var errors = contract.validate();
+      var errors = filter.validate();
       this.setState({errors: errors});
       return !errors.length;
     },

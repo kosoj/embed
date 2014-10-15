@@ -1,6 +1,6 @@
 {
-  "name": "este",
-  "version": "6.3.8",
+  "name": "embedit-este",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "este-library": "git://github.com/steida/este-library.git",

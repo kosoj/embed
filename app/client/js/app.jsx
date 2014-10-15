@@ -1,28 +1,25 @@
 goog.provide('App');
 
 /**
-  @param {este.Router} router
-  @param {app.Routes} routes
-  @param {Element} element
-  @param {app.react.App} reactApp
-  @param {app.contracts.Store} contractsStore
-  @constructor
+ @param {este.Router} router
+ @param {app.Routes} routes
+ @param {Element} element
+ @param {app.react.Container} container
+ @param {app.model.store.StoreRegistry} storeRegistry
+ @constructor
  */
-App = function(router, routes, element, reactApp, contractsStore) {
+App = function (router, routes, element, container, storeRegistry) {
 
-  var syncUI = function() {
-    // document.title = appTitle.get()
-    React.renderComponent(<reactApp.component />, element);
+  var syncUI = function () {
+    React.renderComponent(<container.component />, element);
   };
 
-  routes.addToEste(router, function(route, params) {
+  routes.addToEste(router, function (route, params) {
     routes.setActive(route, params);
     syncUI();
   });
 
-  // TODO(steida): We are slowly overloading app, there should be a object
-  // which responsibility is to watch all stores and notify changes.
-  contractsStore.listen('change', syncUI);
+  storeRegistry.listen('change', syncUI);
 
   router.start()
 };

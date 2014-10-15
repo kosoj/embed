@@ -1,11 +1,11 @@
-goog.provide('app.ValidationError');
+goog.provide('app.model.common.ValidationError');
 
 /**
   @param {string} message
   @param {string=} prop
   @constructor
  */
-app.ValidationError = function(message, prop) {
+app.model.common.ValidationError = function(message, prop) {
   this.message = message;
   this.prop = prop;
 };
