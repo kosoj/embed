@@ -10,7 +10,7 @@ app.react.layout.Header = function () {
     render: function () {
       return (
         <header className="page-header">
-        <h1>EmbedIT <small> REACT application example</small></h1>
+          <h1>EmbedIT <small> REACT application example</small></h1>
         </header>
         );
     }

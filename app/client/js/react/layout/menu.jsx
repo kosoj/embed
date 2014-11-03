@@ -12,7 +12,7 @@ app.react.layout.Menu = function (routes) {
       return (
         <nav>
           <ul className="nav nav-pills" role="tablist">
-              {routes.list.map(this.createMenu)}
+              {routes.getList().map(this.createMenu)}
           </ul>
         </nav>
         );

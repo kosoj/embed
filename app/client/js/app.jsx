@@ -11,7 +11,7 @@ goog.provide('App');
 App = function (router, routes, element, container, storeRegistry) {
 
   var syncUI = function () {
-    React.renderComponent(<container.component />, element);
+    React.render(<container.component />, element);
   };
 
   routes.addToEste(router, function (route, params) {

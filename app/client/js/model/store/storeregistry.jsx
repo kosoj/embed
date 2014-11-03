@@ -26,8 +26,8 @@ app.model.store.StoreRegistry.prototype.addStore = function (store) {
   store.listen('change', this.notify.bind(this));
 };
 
-/**gulp
- * @param {string} type
+/**
+ *
  */
 app.model.store.StoreRegistry.prototype.notify = function () {
   this.dispatchEvent({

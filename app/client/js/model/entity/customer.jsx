@@ -10,7 +10,7 @@ app.model.entity.Customer = function () {
   /**
    @type {number}
    */
-  this.cuid = null;
+  this.cuid = 0;
   /**
    @type {string}
    */

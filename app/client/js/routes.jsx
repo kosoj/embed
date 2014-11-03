@@ -24,6 +24,7 @@ app.Routes = function() {
   this.contractDetail.parent = this.contract;
   this.contract.children.push(this.contractDetail);
 
+
   // this.notFound = this.route('*');
 }
 goog.inherits(app.Routes, este.Routes);
@@ -35,4 +36,11 @@ goog.inherits(app.Routes, este.Routes);
  */
 app.Routes.prototype.isActive = function(route) {
   return this.active == route;
+}
+
+/**
+ * @returns {Array.<este.Route>}
+ */
+app.Routes.prototype.getList = function() {
+  return this.list;
 }
